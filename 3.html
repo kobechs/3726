@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script><script src="classic.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+
+<!DOCTYPE html>
+
+<script>
+ // 問題番号
+        let no = 0;
+        // 正解数
+        let score = 0;
+        // 単語リスト
+        let wordList = [
+            {
+                japanese: "頒布",
+                english: "はんぷ"
+            },
+            {
+                japanese: "成就",
+                english: "じょうじゅ"
+            },
+            {
+                japanese: "更迭",
+                english: "こうてつ"
+            },
+            {
+                japanese: "賄う",
+                english: "まかな"
+            },
+            {
+                japanese: "来賓",
+                english: "らいひん"
+            },
+            {
+                japanese: "釣果",
+                english: "ちょうか"
+            },
+            {
+                japanese: "陥る",
+                english: "おちい"
+            },
+        ];
+        
+  // 問題を表示する
+function showQuestion() {
+    if(no < wordList.length) {
+    // 次の問題がある場合は、表示する
+        document.getElementById("question").innerHTML = wordList[no].japanese;} else {
+        // 全問終了したら、成績を発表する
+        document.getElementById("question").innerHTML = score + "/" + wordList.length;
+        document.getElementById("answerForm").style.display = "none";
+        if(score == wordList.length) {
+            // 全問正解の場合
+            document.getElementById("resultMessage").innerHTML = "全問正解！おめでとう🎊 ";
+            document.getElementById("resultImage").src = "medaru.png";
+        } else if(score >= wordList.length * 0.6) {
+            // 6 割以上正解の場合
+            document.getElementById("resultMessage").innerHTML = "おしい！あとすこし！！";
+            document.getElementById("resultImage").src = "benkyou.png";
+        } else {
+            // 6 割未満の場合
+            document.getElementById("resultMessage").innerHTML = "もう一度解きなおそう！！";
+            document.getElementById("resultImage").src = "gannbare.png";
+        }
+    }
+}
+
+       
+        // 入力された回答の正誤判定を行う
+        function judge() {
+            var answer = document.getElementById("answer").value;
+            if(answer == wordList[no].english){
+                alert("せいかい！！");
+                score++;
+            } else {
+                alert("ざんねん、、");
+            }
+
+            no++;
+            showQuestion();
+            var answer = document.getElementById("answer").value = "";
+        }
+      
+ function handleKeyPress(event) {
+            // Enterキーが押されたかを確認 (keyCode 13はEnterキー)
+            if (event.key === "Enter") {
+                document.getElementById("myButton").click();  // ボタンをクリック
+            }
+        }
+
+ 
+    </script>
+</head>
+<body onload="showQuestion()">
+	<h1 id="title">漢字　読み方</h1>
+	<div id="question"></div>
+	<div id="answerForm">
+		<input type="text" id="answer" onkeypress="handleKeyPress(event)" placeholder="読み仮名を入力">
+<button id="myButton" onclick="judge()">OK</button>
+       
+	</div>
+   <p id="resultMessage"></p>
+	<img id="resultImage" src="">
+</body>
+
+ <style>
+        body{
+             background-image: url("enogu.jpg");
+             background-size: cover;
+        }
+    </style>
+
+
+<head>
+    <style>
+        #timer {
+            font-size: 80px;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer">2:00</div>
+    <div hidden id="timer"></div>
+    
+
+    <script>
+        var timeLeft = 2 * 60; // 10分を秒に変換
+
+        function updateTimer() {
+            var minutes = Math.floor(timeLeft / 60);
+            var seconds = timeLeft % 60;
+
+            seconds = seconds < 2 ? '0' + seconds : seconds;
+            
+   
+            document.getElementById('timer').textContent = minutes + ':' + seconds;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                document.getElementById('timer').textContent = "タイムアップ!";
+            } else {
+                timeLeft--;
+            }
+        }
+
+        var timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+  <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイマー</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: opacity 1s;
+        }
+        .hidden {
+            opacity: 0;
+        }
+
+    </style>
+</head>
+
+
+ <button onclick="location.href='3.html'"><a href="ice.html" class="btn">選択画面に戻る</a>
